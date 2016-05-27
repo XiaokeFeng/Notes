@@ -1,7 +1,8 @@
 ## Machine Learning
-> 区分：分类问题与线性回归问题
 
 ## 线性回归
+> 区分：分类问题与线性回归问题
+
 * model Linear
 * cost function 拟合的波动范围，方差？
 * gradient descent 
@@ -12,6 +13,8 @@
     * 求导过程，即如何在线性回归中利用梯度下降来拟合
     * 为什么可以利用梯度下降来找到全局极值？
 * vectorized impletementation
-    * 如何实现向量化？
+    * 如何实现向量化？向量化后，每一个部分代表什么意思？
+* feature scaling
+    * 对于一个特征，如何确定其值？min,max,avg...
 
 ## 逻辑回归
