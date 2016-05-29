@@ -16,5 +16,7 @@
     * 如何实现向量化？向量化后，每一个部分代表什么意思？
 * feature scaling
     * 对于一个特征，如何确定其值？min,max,avg...
+* learning rate
+    * 如何选择阿尔法值，来保证cost function下降？
 
 ## 逻辑回归
