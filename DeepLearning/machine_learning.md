@@ -18,5 +18,7 @@
     * 对于一个特征，如何确定其值？min,max,avg...
 * learning rate
     * 如何选择阿尔法值，来保证cost function下降？
+* features and polynomial regresion
+    * 如何方程化？如何选择特征多项式
 
 ## 逻辑回归
