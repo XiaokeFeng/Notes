@@ -15,5 +15,5 @@
 
 ## MultiThread
 
-* [POSIX多线程程序设计](http://pan.baidu.com/s/1dFfUbCH)
-* [多处理器编程的艺术](http://pan.baidu.com/s/1geQqSJT)
+* PDF [POSIX多线程程序设计](http://pan.baidu.com/s/1dFfUbCH)
+* PDF [多处理器编程的艺术](http://pan.baidu.com/s/1geQqSJT)

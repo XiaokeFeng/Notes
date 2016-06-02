@@ -44,14 +44,12 @@ void alarm_insert(alarm_t* alarm)
         *last = alarm;
         alarm->link = NULL;
     }
-#ifdef DEBUG
     printf("[list: ");
     for (next = alarm_list; next != NULL; next = next->link)
     {
         printf("%d(%d)[\"%s\"] ", next->time, next->time - time(NULL), next->message);
     }
     printf("]\n");
-#endif
 
     // wake up the thread
     if (current_alarm == 0 || alarm->time < current_alarm)
@@ -77,6 +75,7 @@ void* alarm_thread(void* arg)
         current_alarm = 0;
         while (alarm_list == NULL)
         {
+            // pthread_cond_wait 相当于 unlock && lock
             status = pthread_cond_wait(&alarm_cond, &alarm_mutex);
             assert(status == 0);
         }
@@ -87,9 +86,7 @@ void* alarm_thread(void* arg)
         expired = 0;
         if (alarm->time > now)
         {
-#ifdef DEBUG
             printf("[waiting: %d(%d)\"%s\"]\n", alarm->time, alarm->time - time(NULL), alarm->message);
-#endif
             cond_time.tv_sec = alarm->time;
             cond_time.tv_nsec = 0;
             current_alarm = alarm->time;
