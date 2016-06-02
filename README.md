@@ -12,3 +12,8 @@
 ## Kernel
 
 * [Linux Kernel Architecture Web](http://www.tldp.org/LDP/tlk/tlk-toc.html)
+
+## MultiThread
+
+* [POSIX多线程程序设计](http://pan.baidu.com/s/1dFfUbCH)
+* [多处理器编程的艺术](http://pan.baidu.com/s/1geQqSJT)
