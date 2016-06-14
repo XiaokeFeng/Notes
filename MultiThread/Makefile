@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named once
+
+# Build rule for target.
+once: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 once
+.PHONY : once
+
+# fast build rule for target.
+once/fast:
+	$(MAKE) -f CMakeFiles/once.dir/build.make CMakeFiles/once.dir/build
+.PHONY : once/fast
+
+#=============================================================================
 # Target rules for targets named alarm_demo
 
 # Build rule for target.
@@ -123,32 +136,59 @@ alarm_demo/fast:
 	$(MAKE) -f CMakeFiles/alarm_demo.dir/build.make CMakeFiles/alarm_demo.dir/build
 .PHONY : alarm_demo/fast
 
-src/alarm_cond.o: src/alarm_cond.c.o
+src/alarm_cond.o: src/alarm_cond.cpp.o
 
 .PHONY : src/alarm_cond.o
 
 # target to build an object file
-src/alarm_cond.c.o:
-	$(MAKE) -f CMakeFiles/alarm_demo.dir/build.make CMakeFiles/alarm_demo.dir/src/alarm_cond.c.o
-.PHONY : src/alarm_cond.c.o
+src/alarm_cond.cpp.o:
+	$(MAKE) -f CMakeFiles/alarm_demo.dir/build.make CMakeFiles/alarm_demo.dir/src/alarm_cond.cpp.o
+.PHONY : src/alarm_cond.cpp.o
 
-src/alarm_cond.i: src/alarm_cond.c.i
+src/alarm_cond.i: src/alarm_cond.cpp.i
 
 .PHONY : src/alarm_cond.i
 
 # target to preprocess a source file
-src/alarm_cond.c.i:
-	$(MAKE) -f CMakeFiles/alarm_demo.dir/build.make CMakeFiles/alarm_demo.dir/src/alarm_cond.c.i
-.PHONY : src/alarm_cond.c.i
+src/alarm_cond.cpp.i:
+	$(MAKE) -f CMakeFiles/alarm_demo.dir/build.make CMakeFiles/alarm_demo.dir/src/alarm_cond.cpp.i
+.PHONY : src/alarm_cond.cpp.i
 
-src/alarm_cond.s: src/alarm_cond.c.s
+src/alarm_cond.s: src/alarm_cond.cpp.s
 
 .PHONY : src/alarm_cond.s
 
 # target to generate assembly for a file
-src/alarm_cond.c.s:
-	$(MAKE) -f CMakeFiles/alarm_demo.dir/build.make CMakeFiles/alarm_demo.dir/src/alarm_cond.c.s
-.PHONY : src/alarm_cond.c.s
+src/alarm_cond.cpp.s:
+	$(MAKE) -f CMakeFiles/alarm_demo.dir/build.make CMakeFiles/alarm_demo.dir/src/alarm_cond.cpp.s
+.PHONY : src/alarm_cond.cpp.s
+
+src/once.o: src/once.cpp.o
+
+.PHONY : src/once.o
+
+# target to build an object file
+src/once.cpp.o:
+	$(MAKE) -f CMakeFiles/once.dir/build.make CMakeFiles/once.dir/src/once.cpp.o
+.PHONY : src/once.cpp.o
+
+src/once.i: src/once.cpp.i
+
+.PHONY : src/once.i
+
+# target to preprocess a source file
+src/once.cpp.i:
+	$(MAKE) -f CMakeFiles/once.dir/build.make CMakeFiles/once.dir/src/once.cpp.i
+.PHONY : src/once.cpp.i
+
+src/once.s: src/once.cpp.s
+
+.PHONY : src/once.s
+
+# target to generate assembly for a file
+src/once.cpp.s:
+	$(MAKE) -f CMakeFiles/once.dir/build.make CMakeFiles/once.dir/src/once.cpp.s
+.PHONY : src/once.cpp.s
 
 # Help Target
 help:
@@ -157,11 +197,15 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... once"
 	@echo "... edit_cache"
 	@echo "... alarm_demo"
 	@echo "... src/alarm_cond.o"
 	@echo "... src/alarm_cond.i"
 	@echo "... src/alarm_cond.s"
+	@echo "... src/once.o"
+	@echo "... src/once.i"
+	@echo "... src/once.s"
 .PHONY : help
 
 

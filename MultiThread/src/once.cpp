@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
     status = pthread_create(&thread_id, NULL, thread_routine, NULL);
     assert(status == 0);
 
-    status = pthread_once(&once_lock, once_init_routing);
+    status = pthread_once(&once_block, once_init_routine);
     assert(status == 0);
 
     status = pthread_mutex_lock(&mutex);
@@ -48,5 +48,7 @@ int main(int argc, char* argv[])
     status = pthread_mutex_unlock(&mutex);
     assert(status == 0);
 
+    status = pthread_join(thread_id, NULL);
+    assert(status == 0);
     return 0;
 }
