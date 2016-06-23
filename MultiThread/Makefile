@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/fengxiaoke/github/notes/MultiThread
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -77,6 +66,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named alarm_demo
+
+# Build rule for target.
+alarm_demo: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 alarm_demo
+.PHONY : alarm_demo
+
+# fast build rule for target.
+alarm_demo/fast:
+	$(MAKE) -f CMakeFiles/alarm_demo.dir/build.make CMakeFiles/alarm_demo.dir/build
+.PHONY : alarm_demo/fast
+
+#=============================================================================
 # Target rules for targets named once
 
 # Build rule for target.
@@ -124,17 +137,30 @@ once/fast:
 .PHONY : once/fast
 
 #=============================================================================
-# Target rules for targets named alarm_demo
+# Target rules for targets named cancel
 
 # Build rule for target.
-alarm_demo: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 alarm_demo
-.PHONY : alarm_demo
+cancel: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cancel
+.PHONY : cancel
 
 # fast build rule for target.
-alarm_demo/fast:
-	$(MAKE) -f CMakeFiles/alarm_demo.dir/build.make CMakeFiles/alarm_demo.dir/build
-.PHONY : alarm_demo/fast
+cancel/fast:
+	$(MAKE) -f CMakeFiles/cancel.dir/build.make CMakeFiles/cancel.dir/build
+.PHONY : cancel/fast
+
+#=============================================================================
+# Target rules for targets named cancel_disable
+
+# Build rule for target.
+cancel_disable: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cancel_disable
+.PHONY : cancel_disable
+
+# fast build rule for target.
+cancel_disable/fast:
+	$(MAKE) -f CMakeFiles/cancel_disable.dir/build.make CMakeFiles/cancel_disable.dir/build
+.PHONY : cancel_disable/fast
 
 src/alarm_cond.o: src/alarm_cond.cpp.o
 
@@ -162,6 +188,60 @@ src/alarm_cond.s: src/alarm_cond.cpp.s
 src/alarm_cond.cpp.s:
 	$(MAKE) -f CMakeFiles/alarm_demo.dir/build.make CMakeFiles/alarm_demo.dir/src/alarm_cond.cpp.s
 .PHONY : src/alarm_cond.cpp.s
+
+src/cancel.o: src/cancel.cpp.o
+
+.PHONY : src/cancel.o
+
+# target to build an object file
+src/cancel.cpp.o:
+	$(MAKE) -f CMakeFiles/cancel.dir/build.make CMakeFiles/cancel.dir/src/cancel.cpp.o
+.PHONY : src/cancel.cpp.o
+
+src/cancel.i: src/cancel.cpp.i
+
+.PHONY : src/cancel.i
+
+# target to preprocess a source file
+src/cancel.cpp.i:
+	$(MAKE) -f CMakeFiles/cancel.dir/build.make CMakeFiles/cancel.dir/src/cancel.cpp.i
+.PHONY : src/cancel.cpp.i
+
+src/cancel.s: src/cancel.cpp.s
+
+.PHONY : src/cancel.s
+
+# target to generate assembly for a file
+src/cancel.cpp.s:
+	$(MAKE) -f CMakeFiles/cancel.dir/build.make CMakeFiles/cancel.dir/src/cancel.cpp.s
+.PHONY : src/cancel.cpp.s
+
+src/cancel_disable.o: src/cancel_disable.cpp.o
+
+.PHONY : src/cancel_disable.o
+
+# target to build an object file
+src/cancel_disable.cpp.o:
+	$(MAKE) -f CMakeFiles/cancel_disable.dir/build.make CMakeFiles/cancel_disable.dir/src/cancel_disable.cpp.o
+.PHONY : src/cancel_disable.cpp.o
+
+src/cancel_disable.i: src/cancel_disable.cpp.i
+
+.PHONY : src/cancel_disable.i
+
+# target to preprocess a source file
+src/cancel_disable.cpp.i:
+	$(MAKE) -f CMakeFiles/cancel_disable.dir/build.make CMakeFiles/cancel_disable.dir/src/cancel_disable.cpp.i
+.PHONY : src/cancel_disable.cpp.i
+
+src/cancel_disable.s: src/cancel_disable.cpp.s
+
+.PHONY : src/cancel_disable.s
+
+# target to generate assembly for a file
+src/cancel_disable.cpp.s:
+	$(MAKE) -f CMakeFiles/cancel_disable.dir/build.make CMakeFiles/cancel_disable.dir/src/cancel_disable.cpp.s
+.PHONY : src/cancel_disable.cpp.s
 
 src/once.o: src/once.cpp.o
 
@@ -196,13 +276,21 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
-	@echo "... once"
 	@echo "... edit_cache"
+	@echo "... rebuild_cache"
 	@echo "... alarm_demo"
+	@echo "... once"
+	@echo "... cancel"
+	@echo "... cancel_disable"
 	@echo "... src/alarm_cond.o"
 	@echo "... src/alarm_cond.i"
 	@echo "... src/alarm_cond.s"
+	@echo "... src/cancel.o"
+	@echo "... src/cancel.i"
+	@echo "... src/cancel.s"
+	@echo "... src/cancel_disable.o"
+	@echo "... src/cancel_disable.i"
+	@echo "... src/cancel_disable.s"
 	@echo "... src/once.o"
 	@echo "... src/once.i"
 	@echo "... src/once.s"
