@@ -1,8 +1,4 @@
-#include <pthread.h>
-#include <stdio.h>
-#include <assert.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "common_inc.h"
 
 static int counter;
 
@@ -11,6 +7,7 @@ void* thread_routine(void* arg)
     printf("thread_routine starting...\n");
     for (counter = 0; ; counter++)
     {
+        // counter must be multiple of 1000 when current thread is canceled by main thread using cancel function
         if (0 == (counter % 1000))
         {
             printf("calling testcancel\n");   
@@ -27,7 +24,7 @@ int main(int argc, char** argv)
 
     status = pthread_create(&thread_id, NULL, thread_routine, NULL);
     assert(status == 0);
-    sleep(2);
+    sleep(1);
 
     printf("calling cancel\n");
     status = pthread_cancel(thread_id);

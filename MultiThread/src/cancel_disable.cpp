@@ -1,9 +1,4 @@
-#include <pthread.h>
-#include <stdio.h>
-#include <assert.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/time.h>
+#include "common_inc.h" 
 static int counter;
 
 void* thread_routine(void* arg)

@@ -1,6 +1,4 @@
-#include <pthread.h>
-#include <assert.h>
-#include <stdio.h>
+#include "common_inc.h"
 
 pthread_once_t once_block = PTHREAD_ONCE_INIT;
 pthread_mutex_t mutex;
