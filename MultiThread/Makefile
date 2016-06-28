@@ -137,6 +137,19 @@ once/fast:
 .PHONY : once/fast
 
 #=============================================================================
+# Target rules for targets named cancel_cleanup
+
+# Build rule for target.
+cancel_cleanup: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cancel_cleanup
+.PHONY : cancel_cleanup
+
+# fast build rule for target.
+cancel_cleanup/fast:
+	$(MAKE) -f CMakeFiles/cancel_cleanup.dir/build.make CMakeFiles/cancel_cleanup.dir/build
+.PHONY : cancel_cleanup/fast
+
+#=============================================================================
 # Target rules for targets named cancel_async
 
 # Build rule for target.
@@ -256,6 +269,33 @@ src/cancel_async.cpp.s:
 	$(MAKE) -f CMakeFiles/cancel_async.dir/build.make CMakeFiles/cancel_async.dir/src/cancel_async.cpp.s
 .PHONY : src/cancel_async.cpp.s
 
+src/cancel_cleanup.o: src/cancel_cleanup.cpp.o
+
+.PHONY : src/cancel_cleanup.o
+
+# target to build an object file
+src/cancel_cleanup.cpp.o:
+	$(MAKE) -f CMakeFiles/cancel_cleanup.dir/build.make CMakeFiles/cancel_cleanup.dir/src/cancel_cleanup.cpp.o
+.PHONY : src/cancel_cleanup.cpp.o
+
+src/cancel_cleanup.i: src/cancel_cleanup.cpp.i
+
+.PHONY : src/cancel_cleanup.i
+
+# target to preprocess a source file
+src/cancel_cleanup.cpp.i:
+	$(MAKE) -f CMakeFiles/cancel_cleanup.dir/build.make CMakeFiles/cancel_cleanup.dir/src/cancel_cleanup.cpp.i
+.PHONY : src/cancel_cleanup.cpp.i
+
+src/cancel_cleanup.s: src/cancel_cleanup.cpp.s
+
+.PHONY : src/cancel_cleanup.s
+
+# target to generate assembly for a file
+src/cancel_cleanup.cpp.s:
+	$(MAKE) -f CMakeFiles/cancel_cleanup.dir/build.make CMakeFiles/cancel_cleanup.dir/src/cancel_cleanup.cpp.s
+.PHONY : src/cancel_cleanup.cpp.s
+
 src/cancel_disable.o: src/cancel_disable.cpp.o
 
 .PHONY : src/cancel_disable.o
@@ -320,6 +360,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... alarm_demo"
 	@echo "... once"
+	@echo "... cancel_cleanup"
 	@echo "... cancel_async"
 	@echo "... cancel"
 	@echo "... cancel_disable"
@@ -332,6 +373,9 @@ help:
 	@echo "... src/cancel_async.o"
 	@echo "... src/cancel_async.i"
 	@echo "... src/cancel_async.s"
+	@echo "... src/cancel_cleanup.o"
+	@echo "... src/cancel_cleanup.i"
+	@echo "... src/cancel_cleanup.s"
 	@echo "... src/cancel_disable.o"
 	@echo "... src/cancel_disable.i"
 	@echo "... src/cancel_disable.s"
