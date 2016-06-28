@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named cancel_subcontract
+
+# Build rule for target.
+cancel_subcontract: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cancel_subcontract
+.PHONY : cancel_subcontract
+
+# fast build rule for target.
+cancel_subcontract/fast:
+	$(MAKE) -f CMakeFiles/cancel_subcontract.dir/build.make CMakeFiles/cancel_subcontract.dir/build
+.PHONY : cancel_subcontract/fast
+
+#=============================================================================
 # Target rules for targets named alarm_demo
 
 # Build rule for target.
@@ -323,6 +336,33 @@ src/cancel_disable.cpp.s:
 	$(MAKE) -f CMakeFiles/cancel_disable.dir/build.make CMakeFiles/cancel_disable.dir/src/cancel_disable.cpp.s
 .PHONY : src/cancel_disable.cpp.s
 
+src/cancel_subcontract.o: src/cancel_subcontract.cpp.o
+
+.PHONY : src/cancel_subcontract.o
+
+# target to build an object file
+src/cancel_subcontract.cpp.o:
+	$(MAKE) -f CMakeFiles/cancel_subcontract.dir/build.make CMakeFiles/cancel_subcontract.dir/src/cancel_subcontract.cpp.o
+.PHONY : src/cancel_subcontract.cpp.o
+
+src/cancel_subcontract.i: src/cancel_subcontract.cpp.i
+
+.PHONY : src/cancel_subcontract.i
+
+# target to preprocess a source file
+src/cancel_subcontract.cpp.i:
+	$(MAKE) -f CMakeFiles/cancel_subcontract.dir/build.make CMakeFiles/cancel_subcontract.dir/src/cancel_subcontract.cpp.i
+.PHONY : src/cancel_subcontract.cpp.i
+
+src/cancel_subcontract.s: src/cancel_subcontract.cpp.s
+
+.PHONY : src/cancel_subcontract.s
+
+# target to generate assembly for a file
+src/cancel_subcontract.cpp.s:
+	$(MAKE) -f CMakeFiles/cancel_subcontract.dir/build.make CMakeFiles/cancel_subcontract.dir/src/cancel_subcontract.cpp.s
+.PHONY : src/cancel_subcontract.cpp.s
+
 src/once.o: src/once.cpp.o
 
 .PHONY : src/once.o
@@ -358,6 +398,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... cancel_subcontract"
 	@echo "... alarm_demo"
 	@echo "... once"
 	@echo "... cancel_cleanup"
@@ -379,6 +420,9 @@ help:
 	@echo "... src/cancel_disable.o"
 	@echo "... src/cancel_disable.i"
 	@echo "... src/cancel_disable.s"
+	@echo "... src/cancel_subcontract.o"
+	@echo "... src/cancel_subcontract.i"
+	@echo "... src/cancel_subcontract.s"
 	@echo "... src/once.o"
 	@echo "... src/once.i"
 	@echo "... src/once.s"
