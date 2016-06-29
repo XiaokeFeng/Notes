@@ -111,69 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named cancel_subcontract
+# Target rules for targets named cancel_disable
 
 # Build rule for target.
-cancel_subcontract: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 cancel_subcontract
-.PHONY : cancel_subcontract
+cancel_disable: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cancel_disable
+.PHONY : cancel_disable
 
 # fast build rule for target.
-cancel_subcontract/fast:
-	$(MAKE) -f CMakeFiles/cancel_subcontract.dir/build.make CMakeFiles/cancel_subcontract.dir/build
-.PHONY : cancel_subcontract/fast
-
-#=============================================================================
-# Target rules for targets named alarm_demo
-
-# Build rule for target.
-alarm_demo: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 alarm_demo
-.PHONY : alarm_demo
-
-# fast build rule for target.
-alarm_demo/fast:
-	$(MAKE) -f CMakeFiles/alarm_demo.dir/build.make CMakeFiles/alarm_demo.dir/build
-.PHONY : alarm_demo/fast
-
-#=============================================================================
-# Target rules for targets named once
-
-# Build rule for target.
-once: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 once
-.PHONY : once
-
-# fast build rule for target.
-once/fast:
-	$(MAKE) -f CMakeFiles/once.dir/build.make CMakeFiles/once.dir/build
-.PHONY : once/fast
-
-#=============================================================================
-# Target rules for targets named cancel_cleanup
-
-# Build rule for target.
-cancel_cleanup: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 cancel_cleanup
-.PHONY : cancel_cleanup
-
-# fast build rule for target.
-cancel_cleanup/fast:
-	$(MAKE) -f CMakeFiles/cancel_cleanup.dir/build.make CMakeFiles/cancel_cleanup.dir/build
-.PHONY : cancel_cleanup/fast
-
-#=============================================================================
-# Target rules for targets named cancel_async
-
-# Build rule for target.
-cancel_async: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 cancel_async
-.PHONY : cancel_async
-
-# fast build rule for target.
-cancel_async/fast:
-	$(MAKE) -f CMakeFiles/cancel_async.dir/build.make CMakeFiles/cancel_async.dir/build
-.PHONY : cancel_async/fast
+cancel_disable/fast:
+	$(MAKE) -f CMakeFiles/cancel_disable.dir/build.make CMakeFiles/cancel_disable.dir/build
+.PHONY : cancel_disable/fast
 
 #=============================================================================
 # Target rules for targets named cancel
@@ -189,17 +137,95 @@ cancel/fast:
 .PHONY : cancel/fast
 
 #=============================================================================
-# Target rules for targets named cancel_disable
+# Target rules for targets named cancel_async
 
 # Build rule for target.
-cancel_disable: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 cancel_disable
-.PHONY : cancel_disable
+cancel_async: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cancel_async
+.PHONY : cancel_async
 
 # fast build rule for target.
-cancel_disable/fast:
-	$(MAKE) -f CMakeFiles/cancel_disable.dir/build.make CMakeFiles/cancel_disable.dir/build
-.PHONY : cancel_disable/fast
+cancel_async/fast:
+	$(MAKE) -f CMakeFiles/cancel_async.dir/build.make CMakeFiles/cancel_async.dir/build
+.PHONY : cancel_async/fast
+
+#=============================================================================
+# Target rules for targets named cancel_cleanup
+
+# Build rule for target.
+cancel_cleanup: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cancel_cleanup
+.PHONY : cancel_cleanup
+
+# fast build rule for target.
+cancel_cleanup/fast:
+	$(MAKE) -f CMakeFiles/cancel_cleanup.dir/build.make CMakeFiles/cancel_cleanup.dir/build
+.PHONY : cancel_cleanup/fast
+
+#=============================================================================
+# Target rules for targets named once
+
+# Build rule for target.
+once: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 once
+.PHONY : once
+
+# fast build rule for target.
+once/fast:
+	$(MAKE) -f CMakeFiles/once.dir/build.make CMakeFiles/once.dir/build
+.PHONY : once/fast
+
+#=============================================================================
+# Target rules for targets named alarm_demo
+
+# Build rule for target.
+alarm_demo: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 alarm_demo
+.PHONY : alarm_demo
+
+# fast build rule for target.
+alarm_demo/fast:
+	$(MAKE) -f CMakeFiles/alarm_demo.dir/build.make CMakeFiles/alarm_demo.dir/build
+.PHONY : alarm_demo/fast
+
+#=============================================================================
+# Target rules for targets named cancel_subcontract
+
+# Build rule for target.
+cancel_subcontract: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cancel_subcontract
+.PHONY : cancel_subcontract
+
+# fast build rule for target.
+cancel_subcontract/fast:
+	$(MAKE) -f CMakeFiles/cancel_subcontract.dir/build.make CMakeFiles/cancel_subcontract.dir/build
+.PHONY : cancel_subcontract/fast
+
+#=============================================================================
+# Target rules for targets named tsd_once
+
+# Build rule for target.
+tsd_once: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tsd_once
+.PHONY : tsd_once
+
+# fast build rule for target.
+tsd_once/fast:
+	$(MAKE) -f CMakeFiles/tsd_once.dir/build.make CMakeFiles/tsd_once.dir/build
+.PHONY : tsd_once/fast
+
+#=============================================================================
+# Target rules for targets named tsd_destructor
+
+# Build rule for target.
+tsd_destructor: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tsd_destructor
+.PHONY : tsd_destructor
+
+# fast build rule for target.
+tsd_destructor/fast:
+	$(MAKE) -f CMakeFiles/tsd_destructor.dir/build.make CMakeFiles/tsd_destructor.dir/build
+.PHONY : tsd_destructor/fast
 
 src/alarm_cond.o: src/alarm_cond.cpp.o
 
@@ -390,6 +416,60 @@ src/once.cpp.s:
 	$(MAKE) -f CMakeFiles/once.dir/build.make CMakeFiles/once.dir/src/once.cpp.s
 .PHONY : src/once.cpp.s
 
+src/tsd_destructor.o: src/tsd_destructor.cpp.o
+
+.PHONY : src/tsd_destructor.o
+
+# target to build an object file
+src/tsd_destructor.cpp.o:
+	$(MAKE) -f CMakeFiles/tsd_destructor.dir/build.make CMakeFiles/tsd_destructor.dir/src/tsd_destructor.cpp.o
+.PHONY : src/tsd_destructor.cpp.o
+
+src/tsd_destructor.i: src/tsd_destructor.cpp.i
+
+.PHONY : src/tsd_destructor.i
+
+# target to preprocess a source file
+src/tsd_destructor.cpp.i:
+	$(MAKE) -f CMakeFiles/tsd_destructor.dir/build.make CMakeFiles/tsd_destructor.dir/src/tsd_destructor.cpp.i
+.PHONY : src/tsd_destructor.cpp.i
+
+src/tsd_destructor.s: src/tsd_destructor.cpp.s
+
+.PHONY : src/tsd_destructor.s
+
+# target to generate assembly for a file
+src/tsd_destructor.cpp.s:
+	$(MAKE) -f CMakeFiles/tsd_destructor.dir/build.make CMakeFiles/tsd_destructor.dir/src/tsd_destructor.cpp.s
+.PHONY : src/tsd_destructor.cpp.s
+
+src/tsd_once.o: src/tsd_once.cpp.o
+
+.PHONY : src/tsd_once.o
+
+# target to build an object file
+src/tsd_once.cpp.o:
+	$(MAKE) -f CMakeFiles/tsd_once.dir/build.make CMakeFiles/tsd_once.dir/src/tsd_once.cpp.o
+.PHONY : src/tsd_once.cpp.o
+
+src/tsd_once.i: src/tsd_once.cpp.i
+
+.PHONY : src/tsd_once.i
+
+# target to preprocess a source file
+src/tsd_once.cpp.i:
+	$(MAKE) -f CMakeFiles/tsd_once.dir/build.make CMakeFiles/tsd_once.dir/src/tsd_once.cpp.i
+.PHONY : src/tsd_once.cpp.i
+
+src/tsd_once.s: src/tsd_once.cpp.s
+
+.PHONY : src/tsd_once.s
+
+# target to generate assembly for a file
+src/tsd_once.cpp.s:
+	$(MAKE) -f CMakeFiles/tsd_once.dir/build.make CMakeFiles/tsd_once.dir/src/tsd_once.cpp.s
+.PHONY : src/tsd_once.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -397,14 +477,16 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... rebuild_cache"
-	@echo "... cancel_subcontract"
-	@echo "... alarm_demo"
-	@echo "... once"
-	@echo "... cancel_cleanup"
-	@echo "... cancel_async"
-	@echo "... cancel"
 	@echo "... cancel_disable"
+	@echo "... cancel"
+	@echo "... cancel_async"
+	@echo "... cancel_cleanup"
+	@echo "... once"
+	@echo "... alarm_demo"
+	@echo "... cancel_subcontract"
+	@echo "... rebuild_cache"
+	@echo "... tsd_once"
+	@echo "... tsd_destructor"
 	@echo "... src/alarm_cond.o"
 	@echo "... src/alarm_cond.i"
 	@echo "... src/alarm_cond.s"
@@ -426,6 +508,12 @@ help:
 	@echo "... src/once.o"
 	@echo "... src/once.i"
 	@echo "... src/once.s"
+	@echo "... src/tsd_destructor.o"
+	@echo "... src/tsd_destructor.i"
+	@echo "... src/tsd_destructor.s"
+	@echo "... src/tsd_once.o"
+	@echo "... src/tsd_once.i"
+	@echo "... src/tsd_once.s"
 .PHONY : help
 
 
