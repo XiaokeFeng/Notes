@@ -11,6 +11,8 @@
 
 <h2 id="ch1">一次性初始化</h2>
 
+示例代码[once.cpp](https://github.com/XiaokeFeng/notes/blob/master/MultiThread/src/once.cpp)
+
 类似于`static`的作用，`pthread_once_t`是由互斥量保护的共享不变量
 
 ```
@@ -19,6 +21,8 @@
 ```
 
 <h2 id="ch2">属性</h2>
+
+示例代码TODO
 
 ### 互斥量属性
 ```
@@ -61,6 +65,8 @@
 
 <h2 id="ch3">取消</h2>
 
+示例代码[cancle.cpp](https://github.com/XiaokeFeng/notes/blob/master/MultiThread/src/cancel.cpp)
+
 * 用途：多线程通常被用于一些启发式的并行“探索”一个数据集，例如寻找最大解、全局最优等。
 
 ```
@@ -74,12 +80,16 @@
 
 <h3 id="ch3.1">推迟取消</h3>
 
+示例代码[cancel\_disable.cpp](https://github.com/XiaokeFeng/notes/blob/master/MultiThread/src/cancel_disable.cpp)
+
 * 取消类型：`PTHREAD_CANCEL_DEFERRED`
 * 线程仅仅在达到取消点时才响应取消请求。
 * 如果没有取消是当前未解决的，那么函数将继续执行。如果线程正在等待一些东西（I/O）时，另外的线程请求取消该线程，那么等待将被打断，并且，线程将开始它的取消清除。
 * 一般是将cancel state设置为PTHREAD\_CANCEL\_DISABLE，此时将不会响应其他thread传来的cancel请求（maybe block or wait the calling thread），等到sleep返回后，可以重新设置为之前的state，来处理cancel请求
 
 <h3 id="ch3.2">异步取消</h3>
+
+示例代码[cancel\_async.cpp](https://github.com/XiaokeFeng/notes/blob/master/MultiThread/src/cancel_async.cpp)
 
 * 不需要通过取消检查点来查询取消请求，在计算密集型的并发计算中，可以缓解`pthread_testcancel`带来的开销
 * 安全性：使用异步取消的时候，不允许调用任何获得资源（例如malloc、加解锁）的函数
@@ -94,6 +104,9 @@
 
 <h3 id="ch3.3">清除</h3>
 
+示例代码[cancel\_cleanup.cpp](https://github.com/XiaokeFeng/notes/blob/master/MultiThread/src/cancel_cleanup.cpp)
+示例代码[cancel\_subcontract.cpp](https://github.com/XiaokeFeng/notes/blob/master/MultiThread/src/cancel_subcontract.cpp)
+
 * 何时需要清除函数
     * 当thread在等待一个条件变量时被取消，它将被唤醒，并需要保持mutex的加锁状态
     * 当thread终止前，通常需要恢复不变量，并且释放mutex
@@ -107,7 +120,10 @@
 
 <h2 id="ch4">线程私有数据</h2>
 
-    线程拥有自己的栈，共享其他地址（代码段、数据段、堆等等）
+示例代码[tsd\_once.cpp](https://github.com/XiaokeFeng/notes/blob/master/MultiThread/src/tsd_once.cpp)
+示例代码[tsd\_destructor.cpp](https://github.com/XiaokeFeng/notes/blob/master/MultiThread/src/tsd_destructor.cpp)
+
+线程拥有自己的栈，共享其他地址（代码段、数据段、堆等等）
 
 ```
     pthread_key_t key;
@@ -117,5 +133,5 @@
     void pthread_getspecific(pthread_key_t key);
 ```
 
-    key必须保证一个进程内唯一，线程内对同一个key进行value的set操作，不同的线程通过get来获取自己set的value
-    destructor函数的参数来自于线程私有数据value
+key必须保证一个进程内唯一，线程内对同一个key进行value的set操作，不同的线程通过get来获取自己set的value
+destructor函数的参数来自于线程私有数据value
