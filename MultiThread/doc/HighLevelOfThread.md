@@ -7,6 +7,7 @@
     * [推迟取消](#ch3.1)
     * [异步取消](#ch3.2)
     * [清除](#ch3.3)
+* [线程私有数据](#ch4)
 
 <h2 id="ch1">一次性初始化</h2>
 
@@ -103,3 +104,18 @@
     * 当thread被取消时
     * 当thread调用`pthread_exit`时
 * 清除函数就是在thread结束之前作一些自身状态的还原、保存操作的
+
+<h2 id="ch4">线程私有数据</h2>
+
+    线程拥有自己的栈，共享其他地址（代码段、数据段、堆等等）
+
+```
+    pthread_key_t key;
+    int pthread_key_create(pthread_key_t* key, void(*destructor)(void*));
+    int pthread_key_delete(pthread_key_t key);
+    int pthread_setspecific(pthread_key_t key, const void* value);
+    void pthread_getspecific(pthread_key_t key);
+```
+
+    key必须保证一个进程内唯一，线程内对同一个key进行value的set操作，不同的线程通过get来获取自己set的value
+    destructor函数的参数来自于线程私有数据value

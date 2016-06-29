@@ -11,6 +11,7 @@ pthread_mutex_t identity_key_mutex = PTHREAD_MUTEX_INITIALIZER;
 long identity_key_counter = 0;
 
 // destructor handler
+// input : value : from the specific data using key
 void identity_key_destructor(void* value)
 {
     private_t* priv = (private_t*)value;
