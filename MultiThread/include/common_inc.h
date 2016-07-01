@@ -2,6 +2,8 @@
 #define _MULTITHREAD_INCLUDE_COMMON_INC_H
 
 #include <pthread.h>
+#include <sched.h>
+
 #include <stdio.h>
 #include <assert.h>
 #include <stdlib.h>

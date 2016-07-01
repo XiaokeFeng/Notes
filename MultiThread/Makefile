@@ -227,6 +227,32 @@ tsd_destructor/fast:
 	$(MAKE) -f CMakeFiles/tsd_destructor.dir/build.make CMakeFiles/tsd_destructor.dir/build
 .PHONY : tsd_destructor/fast
 
+#=============================================================================
+# Target rules for targets named sched_thread
+
+# Build rule for target.
+sched_thread: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sched_thread
+.PHONY : sched_thread
+
+# fast build rule for target.
+sched_thread/fast:
+	$(MAKE) -f CMakeFiles/sched_thread.dir/build.make CMakeFiles/sched_thread.dir/build
+.PHONY : sched_thread/fast
+
+#=============================================================================
+# Target rules for targets named sched_attr
+
+# Build rule for target.
+sched_attr: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sched_attr
+.PHONY : sched_attr
+
+# fast build rule for target.
+sched_attr/fast:
+	$(MAKE) -f CMakeFiles/sched_attr.dir/build.make CMakeFiles/sched_attr.dir/build
+.PHONY : sched_attr/fast
+
 src/alarm_cond.o: src/alarm_cond.cpp.o
 
 .PHONY : src/alarm_cond.o
@@ -416,6 +442,60 @@ src/once.cpp.s:
 	$(MAKE) -f CMakeFiles/once.dir/build.make CMakeFiles/once.dir/src/once.cpp.s
 .PHONY : src/once.cpp.s
 
+src/sched_attr.o: src/sched_attr.cpp.o
+
+.PHONY : src/sched_attr.o
+
+# target to build an object file
+src/sched_attr.cpp.o:
+	$(MAKE) -f CMakeFiles/sched_attr.dir/build.make CMakeFiles/sched_attr.dir/src/sched_attr.cpp.o
+.PHONY : src/sched_attr.cpp.o
+
+src/sched_attr.i: src/sched_attr.cpp.i
+
+.PHONY : src/sched_attr.i
+
+# target to preprocess a source file
+src/sched_attr.cpp.i:
+	$(MAKE) -f CMakeFiles/sched_attr.dir/build.make CMakeFiles/sched_attr.dir/src/sched_attr.cpp.i
+.PHONY : src/sched_attr.cpp.i
+
+src/sched_attr.s: src/sched_attr.cpp.s
+
+.PHONY : src/sched_attr.s
+
+# target to generate assembly for a file
+src/sched_attr.cpp.s:
+	$(MAKE) -f CMakeFiles/sched_attr.dir/build.make CMakeFiles/sched_attr.dir/src/sched_attr.cpp.s
+.PHONY : src/sched_attr.cpp.s
+
+src/sched_thread.o: src/sched_thread.cpp.o
+
+.PHONY : src/sched_thread.o
+
+# target to build an object file
+src/sched_thread.cpp.o:
+	$(MAKE) -f CMakeFiles/sched_thread.dir/build.make CMakeFiles/sched_thread.dir/src/sched_thread.cpp.o
+.PHONY : src/sched_thread.cpp.o
+
+src/sched_thread.i: src/sched_thread.cpp.i
+
+.PHONY : src/sched_thread.i
+
+# target to preprocess a source file
+src/sched_thread.cpp.i:
+	$(MAKE) -f CMakeFiles/sched_thread.dir/build.make CMakeFiles/sched_thread.dir/src/sched_thread.cpp.i
+.PHONY : src/sched_thread.cpp.i
+
+src/sched_thread.s: src/sched_thread.cpp.s
+
+.PHONY : src/sched_thread.s
+
+# target to generate assembly for a file
+src/sched_thread.cpp.s:
+	$(MAKE) -f CMakeFiles/sched_thread.dir/build.make CMakeFiles/sched_thread.dir/src/sched_thread.cpp.s
+.PHONY : src/sched_thread.cpp.s
+
 src/tsd_destructor.o: src/tsd_destructor.cpp.o
 
 .PHONY : src/tsd_destructor.o
@@ -477,6 +557,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... rebuild_cache"
 	@echo "... cancel_disable"
 	@echo "... cancel"
 	@echo "... cancel_async"
@@ -484,9 +565,10 @@ help:
 	@echo "... once"
 	@echo "... alarm_demo"
 	@echo "... cancel_subcontract"
-	@echo "... rebuild_cache"
 	@echo "... tsd_once"
 	@echo "... tsd_destructor"
+	@echo "... sched_thread"
+	@echo "... sched_attr"
 	@echo "... src/alarm_cond.o"
 	@echo "... src/alarm_cond.i"
 	@echo "... src/alarm_cond.s"
@@ -508,6 +590,12 @@ help:
 	@echo "... src/once.o"
 	@echo "... src/once.i"
 	@echo "... src/once.s"
+	@echo "... src/sched_attr.o"
+	@echo "... src/sched_attr.i"
+	@echo "... src/sched_attr.s"
+	@echo "... src/sched_thread.o"
+	@echo "... src/sched_thread.i"
+	@echo "... src/sched_thread.s"
 	@echo "... src/tsd_destructor.o"
 	@echo "... src/tsd_destructor.i"
 	@echo "... src/tsd_destructor.s"

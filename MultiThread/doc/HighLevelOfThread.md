@@ -8,6 +8,9 @@
     * [异步取消](#ch3.2)
     * [清除](#ch3.3)
 * [线程私有数据](#ch4)
+* [实时调度](#ch5)
+    * [线程优先级、调度方式](#ch5.1)
+    * [竞争范围和分配域](#ch5.w)
 
 <h2 id="ch1">一次性初始化</h2>
 
@@ -135,3 +138,30 @@
 
 key必须保证一个进程内唯一，线程内对同一个key进行value的set操作，不同的线程通过get来获取自己set的value
 destructor函数的参数来自于线程私有数据value
+
+<h2 id="ch5">实时调度</h2>
+
+示例代码[]()
+
+<h3 id="ch5.1">线程优先级、调度方式</h3>
+
+```
+    #define _POSIX_THREAD_PRIORITY_SCHEDULING
+    int sched_get_priority_max(int policy);
+    int sched_get_priority_min(int policy);
+    int pthread_attr_getinheritsched(const pthread_attr_t* attr, int* inheritsched);
+    int pthread_attr_setinheritsched(pthread_attr_t* attr, int inheritsched);
+    int pthread_attr_getschedparam(const pthread_attr_t* attr, struct sched_param* param);
+    int pthread_attr_setschedparam(pthread_attr_t* attr, const struct sched_param* param);
+    int pthread_attr_getschedpolicy(const pthread_attr_t* attr, int* policy);
+    int pthread_attr_setschedpolicy(pthread_attr_t* attr, int policy);
+    int phtread_getschedparam(pthread_t thread, int* policy, struct sched_param* param);
+    int pthread_setschedparam(pthread_t thread, int policy, const struct sched_param* param);
+```
+
+<h3 id="ch5.2">竞争范围和分配域</h3>
+
+```
+    int pthread_attr_getscope(const pthread_attr_t* attr, int* contentionscope);
+    int pthread_attr_setscope(pthread_attr_t* attr, int contentionscope);
+```
