@@ -10,7 +10,8 @@
 * [线程私有数据](#ch4)
 * [实时调度](#ch5)
     * [线程优先级、调度方式](#ch5.1)
-    * [竞争范围和分配域](#ch5.w)
+    * [竞争范围和分配域](#ch5.2)
+    * [实时调度的问题](#ch5.3)
 
 <h2 id="ch1">一次性初始化</h2>
 
@@ -141,7 +142,10 @@ destructor函数的参数来自于线程私有数据value
 
 <h2 id="ch5">实时调度</h2>
 
-示例代码[]()
+尽量不要使用实时调度
+
+示例代码[sched\_attr.cpp](https://github.com/XiaokeFeng/notes/blob/master/MultiThread/src/sched_attr.cpp)
+示例代码[sched\_thread.cpp](https://github.com/XiaokeFeng/notes/blob/master/MultiThread/src/sched_thread.cpp)
 
 <h3 id="ch5.1">线程优先级、调度方式</h3>
 
@@ -165,3 +169,15 @@ destructor函数的参数来自于线程私有数据value
     int pthread_attr_getscope(const pthread_attr_t* attr, int* contentionscope);
     int pthread_attr_setscope(pthread_attr_t* attr, int contentionscope);
 ```
+
+* 竞争范围
+    * 系统竞争范围：线程与进程外的线程竞争处理器资源，要求至少一次内核调用
+        > 为什么切换到内核态是耗时的？需要从用户栈切换到内核栈，保存现场、跳转、恢复现场等等；内核还需要check用户代码，是否安全、是否需要调度等等。
+    * 进程竞争范围：进程内部线程之间的竞争
+* 分配域：系统内线程可以为其竞争的处理器的集合
+
+<h3 id="ch5.3">实时调度的问题</h3>
+
+1. 非模块化。通过实时调度，你可能会想提高一些网络通信、资源管理方面的依赖库线程的优先级，但是这样会阻碍所有另外的库。设置了优先级，那么高优先级的线程就必定只能是某一类
+1. 高优先级并非更高。在多处理机上，实时优先级可能会更慢，因为需要进行抢占检查，这类开销无法预知。
+1. 不可移植。
