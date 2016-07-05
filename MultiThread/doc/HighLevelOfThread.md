@@ -198,4 +198,9 @@ destructor函数的参数来自于线程私有数据value
 * rwlock：读写锁实现，允许一写多读
 
 <h3 id="ch6.2">工作队列管理器</h3>
+
+示例代码[workq\_main.cpp](https://github.com/XiaokeFeng/notes/blob/master/MultiThread/src/workq_main.cpp)
+
+* work queue：从一个queue队列中获取请求，创建工作线程来处理
+
 <h3 id="ch6.3">对现存库的处理</h3>

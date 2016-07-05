@@ -176,6 +176,19 @@ cancel_cleanup/fast:
 .PHONY : cancel_cleanup/fast
 
 #=============================================================================
+# Target rules for targets named workq_main
+
+# Build rule for target.
+workq_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 workq_main
+.PHONY : workq_main
+
+# fast build rule for target.
+workq_main/fast:
+	$(MAKE) -f CMakeFiles/workq_main.dir/build.make CMakeFiles/workq_main.dir/build
+.PHONY : workq_main/fast
+
+#=============================================================================
 # Target rules for targets named once
 
 # Build rule for target.
@@ -684,6 +697,60 @@ src/tsd_once.cpp.s:
 	$(MAKE) -f CMakeFiles/tsd_once.dir/build.make CMakeFiles/tsd_once.dir/src/tsd_once.cpp.s
 .PHONY : src/tsd_once.cpp.s
 
+src/workq.o: src/workq.cpp.o
+
+.PHONY : src/workq.o
+
+# target to build an object file
+src/workq.cpp.o:
+	$(MAKE) -f CMakeFiles/workq_main.dir/build.make CMakeFiles/workq_main.dir/src/workq.cpp.o
+.PHONY : src/workq.cpp.o
+
+src/workq.i: src/workq.cpp.i
+
+.PHONY : src/workq.i
+
+# target to preprocess a source file
+src/workq.cpp.i:
+	$(MAKE) -f CMakeFiles/workq_main.dir/build.make CMakeFiles/workq_main.dir/src/workq.cpp.i
+.PHONY : src/workq.cpp.i
+
+src/workq.s: src/workq.cpp.s
+
+.PHONY : src/workq.s
+
+# target to generate assembly for a file
+src/workq.cpp.s:
+	$(MAKE) -f CMakeFiles/workq_main.dir/build.make CMakeFiles/workq_main.dir/src/workq.cpp.s
+.PHONY : src/workq.cpp.s
+
+src/workq_main.o: src/workq_main.cpp.o
+
+.PHONY : src/workq_main.o
+
+# target to build an object file
+src/workq_main.cpp.o:
+	$(MAKE) -f CMakeFiles/workq_main.dir/build.make CMakeFiles/workq_main.dir/src/workq_main.cpp.o
+.PHONY : src/workq_main.cpp.o
+
+src/workq_main.i: src/workq_main.cpp.i
+
+.PHONY : src/workq_main.i
+
+# target to preprocess a source file
+src/workq_main.cpp.i:
+	$(MAKE) -f CMakeFiles/workq_main.dir/build.make CMakeFiles/workq_main.dir/src/workq_main.cpp.i
+.PHONY : src/workq_main.cpp.i
+
+src/workq_main.s: src/workq_main.cpp.s
+
+.PHONY : src/workq_main.s
+
+# target to generate assembly for a file
+src/workq_main.cpp.s:
+	$(MAKE) -f CMakeFiles/workq_main.dir/build.make CMakeFiles/workq_main.dir/src/workq_main.cpp.s
+.PHONY : src/workq_main.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -697,6 +764,7 @@ help:
 	@echo "... cancel"
 	@echo "... cancel_async"
 	@echo "... cancel_cleanup"
+	@echo "... workq_main"
 	@echo "... once"
 	@echo "... alarm_demo"
 	@echo "... cancel_subcontract"
@@ -750,6 +818,12 @@ help:
 	@echo "... src/tsd_once.o"
 	@echo "... src/tsd_once.i"
 	@echo "... src/tsd_once.s"
+	@echo "... src/workq.o"
+	@echo "... src/workq.i"
+	@echo "... src/workq.s"
+	@echo "... src/workq_main.o"
+	@echo "... src/workq_main.i"
+	@echo "... src/workq_main.s"
 .PHONY : help
 
 
