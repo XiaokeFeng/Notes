@@ -56,17 +56,6 @@ CMAKE_BINARY_DIR = /home/fengxiaoke/github/notes/MultiThread
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -77,6 +66,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -109,6 +109,19 @@ preinstall/fast:
 depend:
 	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+#=============================================================================
+# Target rules for targets named rwlock_main
+
+# Build rule for target.
+rwlock_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rwlock_main
+.PHONY : rwlock_main
+
+# fast build rule for target.
+rwlock_main/fast:
+	$(MAKE) -f CMakeFiles/rwlock_main.dir/build.make CMakeFiles/rwlock_main.dir/build
+.PHONY : rwlock_main/fast
 
 #=============================================================================
 # Target rules for targets named cancel_disable
@@ -509,6 +522,60 @@ src/once.cpp.s:
 	$(MAKE) -f CMakeFiles/once.dir/build.make CMakeFiles/once.dir/src/once.cpp.s
 .PHONY : src/once.cpp.s
 
+src/rwlock.o: src/rwlock.cpp.o
+
+.PHONY : src/rwlock.o
+
+# target to build an object file
+src/rwlock.cpp.o:
+	$(MAKE) -f CMakeFiles/rwlock_main.dir/build.make CMakeFiles/rwlock_main.dir/src/rwlock.cpp.o
+.PHONY : src/rwlock.cpp.o
+
+src/rwlock.i: src/rwlock.cpp.i
+
+.PHONY : src/rwlock.i
+
+# target to preprocess a source file
+src/rwlock.cpp.i:
+	$(MAKE) -f CMakeFiles/rwlock_main.dir/build.make CMakeFiles/rwlock_main.dir/src/rwlock.cpp.i
+.PHONY : src/rwlock.cpp.i
+
+src/rwlock.s: src/rwlock.cpp.s
+
+.PHONY : src/rwlock.s
+
+# target to generate assembly for a file
+src/rwlock.cpp.s:
+	$(MAKE) -f CMakeFiles/rwlock_main.dir/build.make CMakeFiles/rwlock_main.dir/src/rwlock.cpp.s
+.PHONY : src/rwlock.cpp.s
+
+src/rwlock_main.o: src/rwlock_main.cpp.o
+
+.PHONY : src/rwlock_main.o
+
+# target to build an object file
+src/rwlock_main.cpp.o:
+	$(MAKE) -f CMakeFiles/rwlock_main.dir/build.make CMakeFiles/rwlock_main.dir/src/rwlock_main.cpp.o
+.PHONY : src/rwlock_main.cpp.o
+
+src/rwlock_main.i: src/rwlock_main.cpp.i
+
+.PHONY : src/rwlock_main.i
+
+# target to preprocess a source file
+src/rwlock_main.cpp.i:
+	$(MAKE) -f CMakeFiles/rwlock_main.dir/build.make CMakeFiles/rwlock_main.dir/src/rwlock_main.cpp.i
+.PHONY : src/rwlock_main.cpp.i
+
+src/rwlock_main.s: src/rwlock_main.cpp.s
+
+.PHONY : src/rwlock_main.s
+
+# target to generate assembly for a file
+src/rwlock_main.cpp.s:
+	$(MAKE) -f CMakeFiles/rwlock_main.dir/build.make CMakeFiles/rwlock_main.dir/src/rwlock_main.cpp.s
+.PHONY : src/rwlock_main.cpp.s
+
 src/sched_attr.o: src/sched_attr.cpp.o
 
 .PHONY : src/sched_attr.o
@@ -623,8 +690,9 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... edit_cache"
+	@echo "... rwlock_main"
 	@echo "... cancel_disable"
 	@echo "... cancel"
 	@echo "... cancel_async"
@@ -664,6 +732,12 @@ help:
 	@echo "... src/once.o"
 	@echo "... src/once.i"
 	@echo "... src/once.s"
+	@echo "... src/rwlock.o"
+	@echo "... src/rwlock.i"
+	@echo "... src/rwlock.s"
+	@echo "... src/rwlock_main.o"
+	@echo "... src/rwlock_main.i"
+	@echo "... src/rwlock_main.s"
 	@echo "... src/sched_attr.o"
 	@echo "... src/sched_attr.i"
 	@echo "... src/sched_attr.s"

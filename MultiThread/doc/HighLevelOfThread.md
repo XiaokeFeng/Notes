@@ -190,10 +190,12 @@ destructor函数的参数来自于线程私有数据value
 
 <h3 id="ch6.1">扩展同步</h3>
 
-示例代码[barrier\_main.cpp]()
+示例代码[barrier\_main.cpp](https://github.com/XiaokeFeng/notes/blob/master/MultiThread/src/barrier_main.cpp)
+示例代码[rwlock\_main.cpp](https://github.com/XiaokeFeng/notes/blob/master/MultiThread/src/rwlock_main.cpp)
 
 * barrier：在并行计算中，一组threads在一个barrier中，必须wait，直到其他线程达到这个point
     > 每个线程通过谓词`cycle`来确定是否等待条件变量，最后一个进入的线程才能改变这个谓词，以唤醒前面到达的线程
+* rwlock：读写锁实现，允许一写多读
 
 <h3 id="ch6.2">工作队列管理器</h3>
 <h3 id="ch6.3">对现存库的处理</h3>
