@@ -202,6 +202,19 @@ cancel_subcontract/fast:
 .PHONY : cancel_subcontract/fast
 
 #=============================================================================
+# Target rules for targets named barrier_main
+
+# Build rule for target.
+barrier_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 barrier_main
+.PHONY : barrier_main
+
+# fast build rule for target.
+barrier_main/fast:
+	$(MAKE) -f CMakeFiles/barrier_main.dir/build.make CMakeFiles/barrier_main.dir/build
+.PHONY : barrier_main/fast
+
+#=============================================================================
 # Target rules for targets named tsd_once
 
 # Build rule for target.
@@ -279,6 +292,60 @@ src/alarm_cond.s: src/alarm_cond.cpp.s
 src/alarm_cond.cpp.s:
 	$(MAKE) -f CMakeFiles/alarm_demo.dir/build.make CMakeFiles/alarm_demo.dir/src/alarm_cond.cpp.s
 .PHONY : src/alarm_cond.cpp.s
+
+src/barrier.o: src/barrier.cpp.o
+
+.PHONY : src/barrier.o
+
+# target to build an object file
+src/barrier.cpp.o:
+	$(MAKE) -f CMakeFiles/barrier_main.dir/build.make CMakeFiles/barrier_main.dir/src/barrier.cpp.o
+.PHONY : src/barrier.cpp.o
+
+src/barrier.i: src/barrier.cpp.i
+
+.PHONY : src/barrier.i
+
+# target to preprocess a source file
+src/barrier.cpp.i:
+	$(MAKE) -f CMakeFiles/barrier_main.dir/build.make CMakeFiles/barrier_main.dir/src/barrier.cpp.i
+.PHONY : src/barrier.cpp.i
+
+src/barrier.s: src/barrier.cpp.s
+
+.PHONY : src/barrier.s
+
+# target to generate assembly for a file
+src/barrier.cpp.s:
+	$(MAKE) -f CMakeFiles/barrier_main.dir/build.make CMakeFiles/barrier_main.dir/src/barrier.cpp.s
+.PHONY : src/barrier.cpp.s
+
+src/barrier_main.o: src/barrier_main.cpp.o
+
+.PHONY : src/barrier_main.o
+
+# target to build an object file
+src/barrier_main.cpp.o:
+	$(MAKE) -f CMakeFiles/barrier_main.dir/build.make CMakeFiles/barrier_main.dir/src/barrier_main.cpp.o
+.PHONY : src/barrier_main.cpp.o
+
+src/barrier_main.i: src/barrier_main.cpp.i
+
+.PHONY : src/barrier_main.i
+
+# target to preprocess a source file
+src/barrier_main.cpp.i:
+	$(MAKE) -f CMakeFiles/barrier_main.dir/build.make CMakeFiles/barrier_main.dir/src/barrier_main.cpp.i
+.PHONY : src/barrier_main.cpp.i
+
+src/barrier_main.s: src/barrier_main.cpp.s
+
+.PHONY : src/barrier_main.s
+
+# target to generate assembly for a file
+src/barrier_main.cpp.s:
+	$(MAKE) -f CMakeFiles/barrier_main.dir/build.make CMakeFiles/barrier_main.dir/src/barrier_main.cpp.s
+.PHONY : src/barrier_main.cpp.s
 
 src/cancel.o: src/cancel.cpp.o
 
@@ -565,6 +632,7 @@ help:
 	@echo "... once"
 	@echo "... alarm_demo"
 	@echo "... cancel_subcontract"
+	@echo "... barrier_main"
 	@echo "... tsd_once"
 	@echo "... tsd_destructor"
 	@echo "... sched_thread"
@@ -572,6 +640,12 @@ help:
 	@echo "... src/alarm_cond.o"
 	@echo "... src/alarm_cond.i"
 	@echo "... src/alarm_cond.s"
+	@echo "... src/barrier.o"
+	@echo "... src/barrier.i"
+	@echo "... src/barrier.s"
+	@echo "... src/barrier_main.o"
+	@echo "... src/barrier_main.i"
+	@echo "... src/barrier_main.s"
 	@echo "... src/cancel.o"
 	@echo "... src/cancel.i"
 	@echo "... src/cancel.s"
