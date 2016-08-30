@@ -146,8 +146,7 @@ TODO
 
 <h4 id="ch1.2.3">Zone Wait Queue Table</h4>
 
-Why Hash Table?
-当IO发生时，一个page应该有一个存放被`wait_on_page_locked()`的进程queue，当page被`unlock_page()`，唤醒queue；
+Why Hash Table?当IO发生时，一个page应该有一个存放被`wait_on_page_locked()`的进程queue，当page被`unlock_page()`，唤醒queue；
 显然应该让所有的page共享一个queue，但是为了避免惊群(thundering herd)问题，需要用hash table实现`zone->wait_table`；
 
 `wait_table`在`free_area_init_core()`的时候申请。
@@ -157,3 +156,10 @@ Why Hash Table?
 等待队列流程图：
 ![Sleeping On A Locked Page](https://raw.githubusercontent.com/XiaokeFeng/notes/master/pictures/SleepingOnALockedPage.png)
 
+<h3 id="ch1.3">Zone Initialisation</h3>
+
+`paging_init()` Each architecture performs this task differently.
+UMA: `free_area_init()`
+NUMA: `free_area_init_node()`
+流程图：
+![ZoneInitialisation](https://raw.githubusercontent.com/XiaokeFeng/notes/master/pictures/ZoneInitialisation.png)
