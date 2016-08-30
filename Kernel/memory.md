@@ -41,9 +41,9 @@ source code: [Linux Cross Refrence](http://lxr.free-electrons.com/)
 
 <h3 id="ch1.1">Nodes</h3>
 
-header: <linux/mmzone.h>
+header: \<linux/mmzone.h\>
 
-```
+```C++
     typedef struct pglist_data {
         /*
         * 分别指向ZONE_DMA, ZONE_NORMAL, ZONE_HIGHMEM
@@ -80,10 +80,35 @@ header: <linux/mmzone.h>
 
 <h3 id="ch1.2">Zones</h3>
 
-header: <linux/mmzone.h>
+header: \<linux/mmzone.h\>
 
-```
+```C++
     typedef struct zone {
-        
+    	unsigned long watermark[NR_WMARK];			// 水印，用于决定是否进行page balance
+    	unsigned long nr_reserved_highatomic;
+    	long lowmem_reserve[MAX_NR_ZONES];			// 预留内存，防止关键内存分配操作失败
+    	unsigned int inactive_ratio;
+    	struct pglist_data      *zone_pgdat;		// 指向自身node，用于遍历各个zone，具体看下面的例子1
     } ____cacheline_internodealigned_in_smp;
+```
+
+每个zone由`zone`维护
+
+例子1：
+
+```c++
+	struct zone* next_zone(struct zone* zone)
+	{
+		pg_data_t* pgdat = zone->zone_pgdat;
+		if (zone < pgdat->node_zones + MAX_NR_ZONES - 1)
+			zone++;
+		else {
+			pgdat = next_online_pgdat(pgdat);
+			if (pgdat)
+				zone = pgdat->node_zones;
+			else
+				zone = NULL;
+		}
+		return zone;
+	}
 ```
