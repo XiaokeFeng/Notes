@@ -1,43 +1,89 @@
 # Overview
+book: [Understand Linux Memory Management](https://www.kernel.org/doc/gorman/html/understand/)
+source code: [Linux Cross Refrence](http://lxr.free-electrons.com/)
 
-* [内存组织](#ch1)
-* [页表](#ch2)
-* [初始化内存管理](#ch3)
-* [物理内存管理](#ch4)
-* [slab分配器](#ch5)
-* [处理器高速缓存和TLB控制]($ch6)
+> Only for some notes.
 
-内存管理涉及如下领域：
-* 内存中的物理内存页的管理
-* 分配大块内存的伙伴系统
-* 分配较小快内存的slab、slub和slob分配器
-* 分配非连续内存块的vmalloc机制
-* 进程的地址空间
+基础部分：
+* [Describing Physical Memory](#ch1)
+    * [Nodes](#ch1.1)
+    * [Zones](#ch1.2)
+    * [Zone Initialisation](#ch1.3)
+    * [Pages](#ch1.4)
+    * [High Memory](#ch1.5)
+* [Page Table Manager](#ch2)
+* [Process Address Space](#ch3)
+适用于各类case的内存管理：
+* [Boot Memory Allocator](#ch4)
+* [Physical Page Allocation](#ch5)
+* [Non-Contiguous Memory Allocation](#ch6)
+* [Slab Allocator](#ch7)
+* [High Memory Management](#ch8)
+* [Page Frame Reclamation](#ch9)
+* [Swap Management](#ch10)
+* [Shared Memory Virtual Filesystem](#ch11)
+* [Out Of Memory Management](#ch12)
 
-首先区分两种计算机类型：
-* UMA（一致内存访问，uniform memory access）将可用内存以连续的方式组织起来，每个CPU共享同一个内存
-* NUMA（非一致内存访问，non-uniform memory access）总是多处理器计算机，每个CPU独占一个内存，各个内存用总线相连
 
+<h2 id="ch1">Describing Physical Memory</h2>
 
-<h2 id="ch1">内存组织</h2>
+两种内存模型：
+* NUMA(Non-Uniform Memory Access), CPU0->MEM0, CPU1->MEM1
+* UMA(Uniform Memory Access), CPUs->MEM
 
-<h3 id="ch1.1">NUMA中的基本概念</h3>
+内存组织：
+* Nodes, MEM0 + MEM1, `struct pglist_data`
+* Zones, ZONE_DMA + ZONE_NORMAL + ZONE_HIGHMEM, `struct zone`
+* Pages, Physical page frame, `struct page`, all pages are kept in a global mem_map array
 
-* 结点，内存划分的基本单位，一个结点连接一个CPU，`pg_data_t`
-* 内存域，结点划分的基本单位，`zone_type`
-    * ZONE_DMA
-    * ZONE_NORMAL
-    * ZONE_HIGHMEM
-    * ZONE_MOVABLE
+关系图：
+![Describing Physical Memory](https://raw.githubusercontent.com/XiaokeFeng/notes/master/picture/DescribingPhysicalMemory.png)
 
-<h3 id="ch1.2">数据结构</h3>
+<h3 id="ch1.1">Nodes</h3>
 
-<h4 id="ch1.2.1">结点管理</h4>
+header: <linux/mmzone.h>
 
-<mmzone.h>
-`pg_data_t`为结点管理的数据结构，提供结点状态、页帧寻址功能，主要包括各zone的指针，所有page实例的指针，本结点的交换守护进程等
+```
+    typedef struct pglist_data {
+        /*
+        * 分别指向ZONE_DMA, ZONE_NORMAL, ZONE_HIGHMEM
+        */
+        struct zone node_zones[MAX_NR_ZONES];
+        /*
+        * 关联其他CPU的ZONE_{TYPE}，node_zones的备用结点
+        */
+        struct zonelist node_zonelists[MAX_ZONELISTS];
+        /*
+        * [1, 3]，不总是MAX_NR_ZONES，有些CPU内存块可能不会有ZONE_DMA或其他的
+        */
+        int nr_zones;
+        /*
+        * all Physical frame in current node.
+        */
+        struct page *node_mem_map;
+        /*
+        * Boot Memory Allocator
+        */
+        struct bootmem_data *bdata;
+        unsigned long node_start_pfn; // 全局唯一的当前node的第一个页逻辑编号
+        unsigned long node_present_pages; // 当前node的全部页数目
+        unsigned long node_spanned_pages; // total numbers, including holes
+        int node_id; // node ID(NID)
+        // coming soon ...
+        wait_queue_head_t kswapd_wait;
+        struct task_struct *kswapd;
+        int kswapd_max_order;
+    } pg_data_t;
+```
 
-<h4 id="ch1.2.2">内存域</h4>
+每个node由`pglist_data`维护，由`init_bootmem_core()`初始化，用宏`for_each_online_pgdat()`进行遍历
 
-<mmzone.h>
-`zone`为内存域的数据结构，主要为域内页管理，何时写入disk、何时收回页、冷热页管理等
+<h3 id="ch1.2">Zones</h3>
+
+header: <linux/mmzone.h>
+
+```
+    typedef struct zone {
+        
+    } ____cacheline_internodealigned_in_smp;
+```
