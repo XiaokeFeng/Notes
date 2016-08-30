@@ -37,7 +37,7 @@ source code: [Linux Cross Refrence](http://lxr.free-electrons.com/)
 * Pages, Physical page frame, `struct page`, all pages are kept in a global mem_map array
 
 关系图：
-![Describing Physical Memory](https://raw.githubusercontent.com/XiaokeFeng/notes/master/picture/DescribingPhysicalMemory.png)
+![Describing Physical Memory](https://raw.githubusercontent.com/XiaokeFeng/notes/master/picture/DescribingPhysicalMemory.jpg)
 
 <h3 id="ch1.1">Nodes</h3>
 
