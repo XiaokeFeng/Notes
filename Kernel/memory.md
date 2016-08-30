@@ -8,6 +8,9 @@ source code: [Linux Cross Refrence](http://lxr.free-electrons.com/)
 * [Describing Physical Memory](#ch1)
     * [Nodes](#ch1.1)
     * [Zones](#ch1.2)
+        * [Zone Watermarks](#ch1.2.1)
+        * [Calculating The Size of Zones](#ch1.2.2)
+        * [Zone Wait Queue Table](#ch1.2.3)
     * [Zone Initialisation](#ch1.3)
     * [Pages](#ch1.4)
     * [High Memory](#ch1.5)
@@ -37,13 +40,13 @@ source code: [Linux Cross Refrence](http://lxr.free-electrons.com/)
 * Pages, Physical page frame, `struct page`, all pages are kept in a global mem_map array
 
 关系图：
-![Describing Physical Memory](https://raw.githubusercontent.com/XiaokeFeng/notes/master/pictures/DescribingPhysicalMemory.jpg)
+![Describing Physical Memory](https://raw.githubusercontent.com/XiaokeFeng/notes/master/pictures/DescribingPhysicalMemory.png)
 
 <h3 id="ch1.1">Nodes</h3>
 
 header: \<linux/mmzone.h\>
 
-```C++
+```c++
     typedef struct pglist_data {
         /*
         * 分别指向ZONE_DMA, ZONE_NORMAL, ZONE_HIGHMEM
@@ -82,17 +85,33 @@ header: \<linux/mmzone.h\>
 
 header: \<linux/mmzone.h\>
 
-```C++
+```c++
     typedef struct zone {
     	unsigned long watermark[NR_WMARK];			// 水印，用于决定是否进行page balance
     	unsigned long nr_reserved_highatomic;
     	long lowmem_reserve[MAX_NR_ZONES];			// 预留内存，防止关键内存分配操作失败
     	unsigned int inactive_ratio;
     	struct pglist_data      *zone_pgdat;		// 指向自身node，用于遍历各个zone，具体看下面的例子1
+        struct per_cpu_pageset __percpu *pageset;   // pre_cpu的pages
+        unsigned long           totalreserve_pages; // 为用户态的内存申请预留的pages数目
+        unsigned long           zone_start_pfn;     // zone_start_paddr >> PAGE_SHIFT
+        unsigned long           spanned_pages;      // spanned_pages = zone_end_pfn - zone_start_pfn;
+        unsigned long           present_pages;      // present_pages = spanned_pages - absent_pages(pages in holes);
+        unsigned long           managed_pages;      // managed_pages = present_pages - reserved_pages;
+        seqlock_t               span_seqlock;
+        wait_queue_head_t       *wait_table;        // a hash table of wait queues of processes waiting on a page to be freed
+        unsigned long           wait_table_hash_nr_entries; // the size of the hash table array
+        unsigned long           wait_table_bits;    // the shift of wait_table_size == (1 << wait_table_bits)
+        struct free_area        free_area[MAX_ORDER];   // free areas of different sizes
+        spinlock_t              lock;
+        spinlock_t              lru_lock;
+        struct lruvec           lruvec;
+        unsigned long percpu_drift_mark;
+        ...
     } ____cacheline_internodealigned_in_smp;
 ```
 
-每个zone由`zone`维护
+每个zone由`zone`维护，`wait_on_page_locked()`和`unlock_page()`来等待一个page释放和释放一个page
 
 例子1：
 
@@ -112,3 +131,29 @@ header: \<linux/mmzone.h\>
 		return zone;
 	}
 ```
+
+<h4 id="ch1.2.1">Zone Watermarks</h4>
+
+*kswapd*: 页置换守护进程（the pageout daemon）将在可用内存降低时被唤醒
+
+* pages_low，在内存初始化的时候，由`free_area_init_core()`计算得出，*kswapd*由buddy allocator唤醒来释放Pages
+* pages_min，*kswapd*将同步的将页写回到disk
+* pages_high，*kswapd*休眠
+
+<h4 id="ch1.2.2">Calculating The Size of Zones</h4>
+
+TODO
+
+<h4 id="ch1.2.3">Zone Wait Queue Table</h4>
+
+Why Hash Table?
+当IO发生时，一个page应该有一个存放被`wait_on_page_locked()`的进程queue，当page被`unlock_page()`，唤醒queue；
+显然应该让所有的page共享一个queue，但是为了避免惊群(thundering herd)问题，需要用hash table实现`zone->wait_table`；
+
+`wait_table`在`free_area_init_core()`的时候申请。
+`wait_table_size()`用于计算其大小。
+`page_waitqueue()`负责返回一个可用的wait queue。
+
+等待队列流程图：
+![Sleeping On A Locked Page](https://raw.githubusercontent.com/XiaokeFeng/notes/master/pictures/SleepingOnALockedPage.png)
+
