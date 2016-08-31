@@ -4,7 +4,6 @@ source code: [Linux Cross Refrence](http://lxr.free-electrons.com/)
 
 > Only for some notes.
 
-基础部分：
 * [Describing Physical Memory](#ch1)
     * [Nodes](#ch1.1)
     * [Zones](#ch1.2)
@@ -16,7 +15,6 @@ source code: [Linux Cross Refrence](http://lxr.free-electrons.com/)
     * [High Memory](#ch1.5)
 * [Page Table Manager](#ch2)
 * [Process Address Space](#ch3)
-适用于各类case的内存管理：
 * [Boot Memory Allocator](#ch4)
 * [Physical Page Allocation](#ch5)
 * [Non-Contiguous Memory Allocation](#ch6)
@@ -40,7 +38,7 @@ source code: [Linux Cross Refrence](http://lxr.free-electrons.com/)
 * Pages, Physical page frame, `struct page`, all pages are kept in a global mem_map array
 
 关系图：
-![Describing Physical Memory](https://raw.githubusercontent.com/XiaokeFeng/notes/master/pictures/DescribingPhysicalMemory.png)
+![Describing Physical Memory](http://i.imgur.com/dFNcZ41.png)
 
 <h3 id="ch1.1">Nodes</h3>
 
@@ -154,7 +152,7 @@ Why Hash Table?当IO发生时，一个page应该有一个存放被`wait_on_page_
 `page_waitqueue()`负责返回一个可用的wait queue。
 
 等待队列流程图：
-![Sleeping On A Locked Page](https://raw.githubusercontent.com/XiaokeFeng/notes/master/pictures/SleepingOnALockedPage.png)
+![Sleeping On A Locked Page](http://i.imgur.com/r81rhYF.png)
 
 <h3 id="ch1.3">Zone Initialisation</h3>
 
@@ -162,4 +160,12 @@ Why Hash Table?当IO发生时，一个page应该有一个存放被`wait_on_page_
 UMA: `free_area_init()`
 NUMA: `free_area_init_node()`
 流程图：
-![ZoneInitialisation](https://raw.githubusercontent.com/XiaokeFeng/notes/master/pictures/ZoneInitialisation.png)
+![ZoneInitialisation](http://i.imgur.com/DppDePv.png)
+
+<h3 id="ch1.4">Pages</h3>
+
+```c++
+    struct page {
+        
+    };
+```
